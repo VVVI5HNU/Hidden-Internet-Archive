@@ -67,7 +67,25 @@ Opening this URL attempts to retrieve the archived response associated with that
 
 **Important:** The `id_` modifier requests the archived content without the usual Wayback Machine toolbar and rewriting.
 
-## 3. Practical Workflow
+## 3. Discover Archived URLs Across Subdomains
+
+Use the following CDX API query to discover historically archived URLs across a target domain and its subdomains.
+
+```text
+https://web.archive.org/cdx/search/cdx?url=*.xyz.com/*&collapse=urlkey&output=text&fl=original
+```
+
+**Parameters:**
+- `url=*.xyz.com/*` – Searches for matching URLs across subdomains and paths.
+- `collapse=urlkey` – Removes duplicate URL entries.
+- `output=text` – Returns results in plain-text format.
+- `fl=original` – Displays only original archived URLs.
+
+**Use Case:** Identify historical API endpoints, forgotten subdomains, old admin panels, staging environments, and deprecated application routes.
+
+**Note:** Results depend on URLs indexed by the Wayback Machine.
+
+## 4. Practical Workflow
 
 1. Identify the target domain.
 2. Query the Wayback Machine CDX API.
@@ -77,7 +95,7 @@ Opening this URL attempts to retrieve the archived response associated with that
 6. Construct the archived URL using the `id_` modifier.
 7. Review the retrieved historical content.
 
-## 4. Security Research Applications
+## 5. Security Research Applications
 
 This technique can be useful during authorized reconnaissance and security assessments to discover:
 
@@ -90,7 +108,7 @@ This technique can be useful during authorized reconnaissance and security asses
 - Old subdomain references.
 - Potentially sensitive information that was publicly archived.
 
-## 5. Important Notes
+## 6. Important Notes
 
 - An archived HTTP `200` response does not guarantee that the original resource is currently accessible.
 - A `403` or `404` response in the CDX results reflects the archived response status, not necessarily the current website's status.
